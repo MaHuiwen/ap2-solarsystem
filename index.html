@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>AP2 三维层级场景：太阳系</title>
+    <style>
+        body { background:#0a0a14; color:#e6e6f0; font-family: "Microsoft YaHei", sans-serif; margin:12px; }
+        h3 { margin:6px 0; }
+        .panel { display:inline-block; vertical-align:top; width:280px; padding:10px;
+                 background:#151528; border:1px solid #333; border-radius:6px; }
+        .row { margin:8px 0; font-size:14px; }
+        .row span.v { color:#9ecbff; }
+        .hint { font-size:12px; color:#9aa; margin-top:8px; line-height:1.7; }
+        button { background:#2a2a44; color:#eee; border:1px solid #555; padding:4px 10px; border-radius:4px; cursor:pointer; }
+        button:hover { background:#3a3a58; }
+        canvas { border:1px solid #333; margin-left:12px; background:#05060d; }
+        input[type=range] { width:160px; }
+    </style>
+</head>
+<body>
+<h3>AP2 · 三维层级场景：太阳系</h3>
+
+<div class="panel">
+    <div class="row">
+        公转速度：<input type="range" id="orbitSpeed" min="0" max="5" step="0.05" value="1">
+        <span class="v" id="orbitSpeedVal">1</span>
+    </div>
+    <div class="row">
+        自转速度：<input type="range" id="spinSpeed" min="0" max="10" step="0.1" value="1">
+        <span class="v" id="spinSpeedVal">1</span>
+    </div>
+    <div class="row">
+        地球自转轴倾角：<input type="range" id="tiltAngle" min="0" max="60" step="0.5" value="23.5">
+        <span class="v" id="tiltAngleVal">23.5°</span>
+    </div>
+    <div class="row">
+        <label><input type="checkbox" id="showOrbits" checked> 显示轨道线</label>
+    </div>
+    <div class="row">
+        <button id="projBtn">切换投影</button>
+        <span class="v" id="projLabel">透视投影</span>
+    </div>
+    <div class="row">
+        <button id="tourBtn">漫游控制</button>
+        <span class="v" id="tourLabel">漫游：播放中</span>
+    </div>
+    <div class="hint">
+        键盘：<b>O</b> 切换 透视/正交 投影；<b>空格</b> 暂停/继续漫游。<br>
+        鼠标：左键<b>拖拽</b>接管视角（自动退出漫游）；<b>滚轮</b>缩放。<br>
+        层级：太阳 → 地球（公转+自转，轴倾 23.5°）→ 月球（绕地球，轨道面手造矩阵倾斜）。
+    </div>
+</div>
+
+<canvas id="glcanvas" width="900" height="600"></canvas>
+
+<!-- 教材 Common 工具库 -->
+<script src="Common/webgl-utils.js"></script>
+<script src="Common/initShaders.js"></script>
+<script src="Common/MV.js"></script>
+
+<script type="module" src="shaders.js"></script>
+<script type="module" src="solar.js"></script>
+<script type="module" src="camera.js"></script>
+<script type="module" src="ui.js"></script>
+<script type="module" src="main.js"></script>
+</body>
+</html>
